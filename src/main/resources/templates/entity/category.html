@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <div th:replace="fragments/header :: header-css"/>
+    <link rel="stylesheet" type="text/css"
+          href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Admin page (Spring Security protected)</h1>
+        <h2>Admin page (Spring Security protected)</h2>
+
+        <div class="container">
+        <h2>Basic Table</h2>
+        <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
+        <table class="table">
+        <thead>
+        <tr>
+        <th>Name</th>
+        <th>Description</th>
+        </tr>
+        </thead>
+        <th:block th:each="category : ${categories}">
+        <tr>
+        <td th:text="${category.name}">...</td>
+        <td th:text="${category.description}">...</td>
+        </tr>
+        </th:block>
+        </table>
+        </div>
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+<script type="text/javascript"
+        src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
