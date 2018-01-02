@@ -1,5 +1,7 @@
 package com.myproject.forum.models;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,6 +15,8 @@ public class Category {
     private String description;
 
     @OneToMany(mappedBy = "category")
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
+
     private Set<Topic> topics;
 
     public Set<Topic> getTopics() {

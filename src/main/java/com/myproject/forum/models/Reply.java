@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "replies")
-public class Replies {
+public class Reply {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,10 +23,10 @@ public class Replies {
     @JoinColumn(name = "topic_id")
     private Topic topic;
 
-    public Replies() {
+    public Reply() {
     }
 
-    public Replies(String text, Date date) {
+    public Reply(String text, Date date) {
         this.text = text;
         this.date = date;
     }

@@ -1,5 +1,7 @@
 package com.myproject.forum.models;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
@@ -18,8 +20,10 @@ public class User {
     private String email;
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.ALL})
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
+    @JoinTable
+            (
             name = "users_roles",
             joinColumns = @JoinColumn(
                     name = "user_id", referencedColumnName = "id"),
@@ -28,10 +32,12 @@ public class User {
     private List<Role> roles;
 
     @OneToMany(mappedBy = "user")
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private Set<Topic> topics;
 
     @OneToMany(mappedBy = "user")
-    private Set<Replies> replies;
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
+    private Set<Reply> replies;
 
 
     public User() {
@@ -113,11 +119,11 @@ public class User {
         this.topics = topics;
     }
 
-    public Set<Replies> getReplies() {
+    public Set<Reply> getReplies() {
         return replies;
     }
 
-    public void setReplies(Set<Replies> replies) {
+    public void setReplies(Set<Reply> replies) {
         this.replies = replies;
     }
 }

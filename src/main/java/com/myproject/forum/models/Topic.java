@@ -1,5 +1,7 @@
 package com.myproject.forum.models;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -21,14 +23,16 @@ public class Topic {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "category_name")
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "user_id")
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private User user;
 
-    @OneToMany(mappedBy = "topic")
-    private Set<Replies> replies;
+    @OneToMany(mappedBy = "topic" ,cascade = CascadeType.ALL)
+    private Set<Reply> replies;
 
     public Topic() {
     }
@@ -97,11 +101,11 @@ public class Topic {
         this.user = user;
     }
 
-    public Set<Replies> getReplies() {
+    public Set<Reply> getReplies() {
         return replies;
     }
 
-    public void setReplies(Set<Replies> replies) {
+    public void setReplies(Set<Reply> replies) {
         this.replies = replies;
     }
 }
