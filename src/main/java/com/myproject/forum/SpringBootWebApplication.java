@@ -2,10 +2,10 @@ package com.myproject.forum;
 
 
 import com.myproject.forum.models.*;
-import com.myproject.forum.repository.CategoryRepository;
+import com.myproject.forum.repository.CategoriesRepository;
 import com.myproject.forum.repository.RepliesRepository;
-import com.myproject.forum.repository.TopicRepository;
-import com.myproject.forum.repository.UserRepository;
+import com.myproject.forum.repository.TopicsRepository;
+import com.myproject.forum.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,13 +23,13 @@ public class SpringBootWebApplication {
 	private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
-	private UserRepository userRepository;
+	private UsersRepository userRepository;
 
 	@Autowired
-	private CategoryRepository categoryRepository;
+	private CategoriesRepository categoryRepository;
 
 	@Autowired
-	private TopicRepository topicRepository;
+	private TopicsRepository topicRepository;
 
 	@Autowired
 	private RepliesRepository repliesRepository;
@@ -63,9 +63,9 @@ public class SpringBootWebApplication {
 		Topic topic2 = new Topic("Topic2", new Date());
 		Topic topic3 = new Topic("Topic3", new Date());
 
-		Replies replies1 = new Replies("Replies1", new Date());
-		Replies replies2 = new Replies("Replies2", new Date());
-		Replies replies3 = new Replies("Replies3", new Date());
+		Reply replies1 = new Reply("Replies1", new Date());
+		Reply replies2 = new Reply("Replies2", new Date());
+		Reply replies3 = new Reply("Replies3", new Date());
 
 		topic1.setCategory(category1);
 		topic1.setUser(userAdmin);

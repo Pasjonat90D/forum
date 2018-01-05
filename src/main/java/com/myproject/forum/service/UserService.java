@@ -2,7 +2,7 @@ package com.myproject.forum.service;
 
 import com.myproject.forum.models.Role;
 import com.myproject.forum.models.User;
-import com.myproject.forum.repository.UserRepository;
+import com.myproject.forum.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class UserService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UsersRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

@@ -1,14 +1,11 @@
 package com.myproject.forum.repository;
 
-
-
-import com.myproject.forum.models.User;
+import com.myproject.forum.models.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface CategoriesRepository extends JpaRepository<Category, String>  {
 
-    User findByEmail(String email);
-
+    Category findByName(String name);
 }
