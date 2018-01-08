@@ -12,15 +12,46 @@
 
 <div class="container">
 
-    <div class="starter-template">
-        <h1>Forum with Spring Boot Web + Thymeleaf + Spring Security + Hibernate</h1>
-        <h2>1. Visit <a th:href="@{/admin}">Admin page (Spring Security protected, Need Admin Role)</a></h2>
-        <h2>2. Visit <a th:href="@{/user}">User page (Spring Security protected, Need User Role)</a></h2>
-        <h2>3. Visit <a th:href="@{/about}">Normal page</a></h2>
+    <div class="btn-group btn-group-justified">
+    <th:block th:each="category : ${categories}">
+        <a class="btn btn-primary" th:text="${category.name}"
+           th:href="@{/page/category/}+${category.name}"></a>
+    </th:block>
     </div>
 
+    <h1>All Topic</h1>
+    <a th:href="@{/page/addTopic}">
+        <button type="button" class="btn btn-primary btn-md">Add Topic</button>
+        </a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Data</th>
+            <th scope="col">Category</th>
+            <th scope="col">User</th>
+        </tr>
+        </thead>
+        <th:block th:each="topic,stat : ${topics}">
+            <tr class="table-tr" th:onclick="'javascript:rowClickedTopic(\'' + ${topic.id} + '\');'">
+                <td th:text="${stat.count}" ></td>
+                <td th:text="${topic.name}">...</td>
+                <td th:text="${#dates.format(topic.date, 'HH:mm dd-MM-yyyy')}">...</td>
+                <td th:text="${topic.category.name}">...</td>
+                <td th:text="${topic.user.firstName}">...</td>
+            </tr>
+        </th:block>
+    </table>
+
+    <script>
+        function rowClickedTopic(value) {
+            location.href = "/page/topic/" + value;
+        }
+    </script>
+
 </div>
-<!-- /.container -->
+
 
 <div th:replace="fragments/footer :: footer"/>
 
