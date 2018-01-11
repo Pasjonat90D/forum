@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <div th:replace="fragments/header :: header-css"/>
+    <link rel="stylesheet" type="text/css"
+          href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <form action="#" th:action="@{/page/editUser}" th:object="${user}" th:method="put">
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="form-group">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" class="form-control" th:field="*{firstName}" id="firstName"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" class="form-control" th:field="*{lastName}" id="lastName"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Apply</button>
+                </form>
+            </div>
+        </div>
+        <footer>
+
+            <span sec:authorize="isAuthenticated()">
+                | Logged user: <span sec:authentication="name"></span> |
+                <a th:href="@{/logout}">Logout</a>
+            </span>
+
+        </footer>
+    </div>
+
+</div>
+
+<script type="text/javascript"
+        src="../../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

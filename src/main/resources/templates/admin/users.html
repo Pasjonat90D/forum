@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <div th:replace="fragments/header :: header-css"/>
+    <link rel="stylesheet" type="text/css"
+          href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Users</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Roles</th>
+            </tr>
+            </thead>
+            <th:block th:each="user : ${users}" >
+                <tr class="table-tr" th:onclick="'javascript:rowClicked(\'' + ${user.id} + '\');'">
+                    <td th:text="${user.id}">...</td>
+                    <td th:text="${user.firstName}">...</td>
+                    <td th:text="${user.lastName}">...</td>
+                    <td th:text="${user.Email}">...</td>
+                    <td th:each="role : ${user.roles}">
+                        <span th:text="${role.name}" />
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+        <span sec:authorize="isAuthenticated()">
+                | Logged user: <span sec:authentication="name"></span> |
+                <a th:href="@{/logout}">Logout</a>
+            </span>
+
+
+    </div>
+
+</div>
+
+<script>
+    function rowClicked(value) {
+        location.href = "/admin/" + value;
+    }
+</script>
+<script type="text/javascript"
+        src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

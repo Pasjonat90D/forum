@@ -9,3 +9,7 @@ h2{
 footer{
     margin-top:60px;
 }
+
+.table-tr:hover{
+	background-color: yellow;
+}

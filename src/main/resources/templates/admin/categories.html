@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <div th:replace="fragments/header :: header-css"/>
+    <link rel="stylesheet" type="text/css"
+          href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+
+        <div class="container">
+
+            <h2>Categories</h2>
+            <a th:href="@{/admin/addCategory}">
+                <button type="button" class="btn btn-primary btn-md">Add Category</button>
+            </a>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <th:block th:each="category : ${categories}">
+                    <tr class="table-tr" th:onclick="'javascript:goToCategory(\'' + ${category.name} + '\');'">
+                        <td th:text="${category.name}">...</td>
+                        <td th:text="${category.description}">...</td>
+                        <td>
+                            <form action="#" th:action="@{/admin/categories(name=${category.name})}" th:method="delete">
+                                <button class="btn btn-primary btn-md" type="submit">
+                                    <i>Delete</i>
+                                </button>
+                            </form>
+                        <a th:href="@{/admin/editCategor{name}(name=${category.name})}">
+                                <button class="btn btn-primary btn-md" type="submit">
+                                    <i>Edit</i>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                </th:block>
+            </table>
+            <footer>
+            <span sec:authorize="isAuthenticated()">
+                | Logged user: <span sec:authentication="name"></span> |
+                <a th:href="@{/logout}">Logout</a>
+            </span>
+
+            </footer>
+        </div>
+    </div>
+    <script>
+        function goToCategory(value) {
+            location.href = "/page/category/" + value;
+        }
+    </script>
+
+</div>
+<script type="text/javascript"
+        src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

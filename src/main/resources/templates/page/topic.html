@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <div th:replace="fragments/header :: header-css"/>
+    <link rel="stylesheet" type="text/css"
+          href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1 th:text="'Topic: '+${topic.name}"></h1>
+        <h3 th:text="'Category: '+${topic.category.name}"></h3>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <th:block th:each="reply : ${topic.replies}">
+                <tr>
+                    <td th:text="${reply.text}">...</td>
+                    <td width="10%" th:text="${#dates.format(reply.date, 'HH:mm dd-MM-yyyy')}">...</td>
+                    <td width="10%" th:text="${reply.user.firstName}" />
+                </tr>
+            </th:block>
+
+        </table>
+        <form action="#" th:action="@{/page/topic/}+${topic.id}" th:object="${reply}" th:method="post" >
+            <textarea class="form-control" rows="8" cols="100" th:field="*{text}" />
+            <button type="submit" value="Add" class="btn btn-primary btn-md">Add</button>
+            <!--<p><input type="submit" value="Add" /> </p>-->
+        </form>
+    </div>
+    <footer>
+
+            <span sec:authorize="isAuthenticated()">
+                | Logged user: <span sec:authentication="name"></span> |
+                <a th:href="@{/logout}">Logout</a>
+            </span>
+
+    </footer>
+</div>
+
+<script type="text/javascript"
+        src="../../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

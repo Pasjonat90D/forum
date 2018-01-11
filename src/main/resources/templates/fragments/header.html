@@ -1,12 +1,14 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
+    <link rel="stylesheet" type="text/css" href="src/main/resources/static/css/register.css"/>
     <div th:fragment="header-css">
         <!-- this is header-css -->
         <link rel="stylesheet" type="text/css"
-              href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+              href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
         <link rel="stylesheet" th:href="@{/css/main.css}"
-              href="../../css/main.css" />
+              href="../../css/main.css"/>
+
     </div>
 </head>
 <body>
@@ -15,12 +17,33 @@
     <nav class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" th:href="@{/}">Spring Boot</a>
+                <a class="navbar-brand" th:href="@{/}">Forum</a>
             </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a th:href="@{/}">Home</a></li>
-                </ul>
+            <div id="navbar" class="navbar-header">
+
+
+
+
+                <div style="float: left" sec:authorize="!isAuthenticated()" >
+                    <a class="navbar-brand" th:href="@{/createAccount}">Register</a>
+                    <a class="navbar-brand" th:href="@{/login}">Login</a>
+                </div>
+
+
+                <div style="float: left" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                    <a class="navbar-brand" th:href="@{/admin/categories}">Category Page</a>
+                    <a class="navbar-brand" th:href="@{/admin/users}">Users</a>
+                </div>
+
+                <div style="float: right"  sec:authorize="isAuthenticated()" >
+                    <a  class="navbar-brand" th:href="@{/page/user/}" >My Panel</a>
+                    <span style="color: #edf038;" >Welcome, <span sec:authentication="name"/></span>
+                    <br />
+                    <a th:href="@{/logout}">
+                        Logout (<span sec:authentication="principal.username"/>)</a>
+
+                </div>
+
             </div>
         </div>
     </nav>

@@ -15,8 +15,7 @@ public class Category {
     private String description;
 
     @OneToMany(mappedBy = "category")
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
-
+    @Cascade({org.hibernate.annotations.CascadeType.DELETE, org.hibernate.annotations.CascadeType.MERGE})
     private Set<Topic> topics;
 
     public Set<Topic> getTopics() {

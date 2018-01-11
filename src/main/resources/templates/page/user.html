@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <div th:replace="fragments/header :: header-css"/>
+    <link rel="stylesheet" type="text/css"
+          href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="container col-md-3 col-md-offset-1" >
+        <h2>User:</h2>
+        <ul class="list-group">
+            <li class="list-group-item" th:text="'First Name: '+${user.firstName}"></li>
+            <li class="list-group-item" th:text="'Last Name: '+${user.lastName}"></li>
+            <li class="list-group-item" th:text="'Email: '+${user.email}"></li>
+        </ul>
+        <div class="btn-group">
+            <a style="float: left" th:href="@{/page/editUser{id}(id=${user.id})}">
+                <button type="button" class="btn btn-primary">Edit</button>
+            </a>
+            <form style="float: right" action="#" th:action="@{/page/user(id=${user.id})}" th:method="delete">
+                <button class="btn btn-primary" th:id="${user.id}" type="submit">
+                    <i>Delete</i>
+                </button>
+            </form>
+        </div>
+    </div>
+        <div class="container col-md-12">
+        <h3>My Replies:</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Text</th>
+                <th>Data</th>
+            </tr>
+            </thead>
+            <th:block th:each="reply,stat : ${user.replies}" >
+
+                <tr class="table-tr" th:onclick="'javascript:rowClickedTopic(\'' + ${reply.topic.id} + '\');'" >
+                    <td th:text="${stat.count}" ></td>
+                    <td width="80%" th:text="${reply.text}">...</td>
+                    <td th:text="${#dates.format(reply.date, 'HH:mm dd-MM-yyyy')}">...</td>
+                </tr>
+
+            </th:block>
+        </table>
+            <footer>
+
+            <span sec:authorize="isAuthenticated()">
+                | Logged user: <span sec:authentication="name"></span> |
+                <a th:href="@{/logout}">Logout</a>
+            </span>
+
+            </footer>
+        </div>
+        <script>
+            function rowClickedTopic(value) {
+                location.href = "/page/topic/" + value;
+            }
+        </script>
+
+
+
+</div>
+
+<script type="text/javascript"
+        src="../../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

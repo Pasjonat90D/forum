@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <div th:replace="fragments/header :: header-css"/>
+    <link rel="stylesheet" type="text/css"
+          href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1 th:text="'Category: '+${category.name}"></h1>
+
+        <div class="container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <th:block  th:each="topic : ${category.topics}">
+                    <tr class="table-tr"  th:onclick="'javascript:rowClickedTopic(\'' + ${topic.id} + '\');'">
+                        <td th:text="${topic.name}">...</td>
+                        <td th:text="${topic.date}">...</td>
+                    </tr>
+                </th:block>
+            </table>
+            <script>
+                function rowClickedTopic(value) {
+                    location.href = "/page/topic/" + value;
+                }
+            </script>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container">
+
+    <footer>
+
+            <span sec:authorize="isAuthenticated()">
+                | Logged user: <span sec:authentication="name"></span> |
+                <a th:href="@{/logout}">Logout</a>
+            </span>
+
+    </footer>
+</div>
+<script type="text/javascript"
+        src="../../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <div th:replace="fragments/header :: header-css"/>
+    <link rel="stylesheet" type="text/css"
+          href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+
+                <form action="#" th:action="@{/admin/user/} + ${{user.id}}" th:method="put">
+                    <div class="form-group">
+                        <label>Id:</label>
+                        <span th:text="${user.id}"/>
+                        <input type="hidden"  th:field="*{user.id}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>First Name:</label>
+                        <span th:text="${user.firstName}"/>
+                        <input type="hidden"  th:field="*{user.firstName}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name:</label>
+                        <span th:text="${user.lastName}"/>
+                        <input type="hidden"  th:field="*{user.lastName}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <span th:text="${user.email}"/>
+                        <input type="hidden"  th:field="*{user.email}"/>
+                    </div>
+                    <button class="btn btn-primary btn-md" type="submit">
+                        <i>Change to Admin</i>
+                    </button>
+                </form>
+                <form action="#" th:action="@{/admin/user/} + ${{user.id}}" th:method="delete">
+                    <button class="btn btn-primary btn-md" type="submit">
+                        <i>Delete</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <span sec:authorize="isAuthenticated()">
+                | Logged user: <span sec:authentication="name"></span> |
+                <a th:href="@{/logout}">Logout</a>
+            </span>
+
+    </div>
+</div>
+
+
+<script type="text/javascript"
+        src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
