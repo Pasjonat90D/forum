@@ -43,7 +43,6 @@ public class CategoriesServiceImpl implements CategoriesService {
         newCategory.setName(editedCategory.getName());
         newCategory.setDescription(editedCategory.getDescription());
         Set<Topic> topics = new HashSet<>();
-        categoriesRepository.findByName(oldNameCategory).getTopics().stream().forEach(System.out::println);
         topics.addAll(categoriesRepository.findByName(oldNameCategory).getTopics());
         categoriesRepository.save(newCategory);
         categoriesRepository.delete(oldNameCategory);
