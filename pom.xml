@@ -21,6 +21,12 @@
     </properties>
 
     <dependencies>
+        <!--Spring Boot Test-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!--ThymeLeaf-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -76,6 +82,7 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- Project Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
