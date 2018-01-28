@@ -13,11 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-// handle 403 page
 @Component
-public class ForbiddenAccessHandler implements AccessDeniedHandler {
+public class PagesAuthentication implements AccessDeniedHandler {
 
-    private static Logger logger = LoggerFactory.getLogger(ForbiddenAccessHandler.class);
+    private static Logger logger = LoggerFactory.getLogger(PagesAuthentication.class);
 
     @Override
     public void handle(HttpServletRequest httpServletRequest,
