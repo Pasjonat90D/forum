@@ -17,5 +17,6 @@ This web application enables inter alia:
   - Thymeleaf
   - Bootstrap
   - Maven
+  - Lombok
 ## License
 MIT
