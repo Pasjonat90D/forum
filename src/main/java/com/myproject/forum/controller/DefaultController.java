@@ -33,7 +33,7 @@ public class DefaultController {
     }
 
     @GetMapping("/")
-    public String home1(Model model) {
+    public String index(Model model) {
         model.addAttribute("categories", categoriesService.getAllCategories());
         model.addAttribute("topics", topicsService.getAllTopics());
         return "/home";
