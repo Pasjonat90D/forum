@@ -1,6 +1,6 @@
 package com.myproject.forum.config;
 
-import com.myproject.forum.service.UserService;
+import com.myproject.forum.service.impl.AuthorizationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,13 +13,11 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 
-// Switch off the Spring Boot security configuration
-//@EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
-    private UserService userService;
+    private AuthorizationServiceImpl authorizationService;
 
     @Autowired
     private AccessDeniedHandler accessDeniedHandler;
@@ -52,7 +50,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-        auth.setUserDetailsService(userService);
+        auth.setUserDetailsService(authorizationService);
         auth.setPasswordEncoder(passwordEncoder());
         return auth;
     }
